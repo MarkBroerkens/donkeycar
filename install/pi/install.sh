@@ -39,9 +39,3 @@ source ~/env/bin/activate
 
 #make sure the virtual environment is active
 source ~/env/bin/activate
-
-# install pandas and numpy
-pip install pandas #also installs numpy
-
-
-pip install tensorflow==1.9
