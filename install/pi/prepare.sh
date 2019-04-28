@@ -5,7 +5,8 @@
 #MEDIA=/media/$USER
 MEDIA=
 BOOT=$MEDIA/boot
-ROOTFS=$MEDIA/rootfs
+#ROOTFS=$MEDIA/rootfs
+ROOTFS=/
 
 sudo touch $BOOT/ssh
 
