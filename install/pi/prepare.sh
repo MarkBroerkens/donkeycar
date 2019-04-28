@@ -2,7 +2,8 @@
 
 #Script to setup pi disk after base rpi image.
 
-MEDIA=/media/$USER
+#MEDIA=/media/$USER
+MEDIA=
 BOOT=$MEDIA/boot
 ROOTFS=$MEDIA/rootfs
 
