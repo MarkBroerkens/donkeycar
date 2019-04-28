@@ -1,13 +1,19 @@
 # donkeycar: a python self driving library
 
-[![Build Status](https://travis-ci.org/autorope/donkeycar.svg?branch=dev)](https://travis-ci.org/autorope/donkeycar)
-[![codecov](https://codecov.io/gh/autorope/donkeycar/branch/master/graph/badge.svg)](https://codecov.io/gh/autorope/donkeycar)
+[![Build Status](https://travis-ci.org/MarkBroerkens/donkeycar.svg?branch=dev)](https://travis-ci.org/MarkBroerkens/donkeycar)
+[![codecov](https://codecov.io/gh/MarkBroerkens/donkeycar/branch/master/graph/badge.svg)](https://codecov.io/gh/MarkBroerkens/donkeycar)
 [![PyPI version](https://badge.fury.io/py/donkeycar.svg)](https://badge.fury.io/py/donkeycar)
 [![Py versions](https://img.shields.io/pypi/pyversions/donkeycar.svg)](https://img.shields.io/pypi/pyversions/donkeycar.svg)
 
 Donkeycar is minimalist and modular self driving library for Python. It is
 developed for hobbyists and students with a focus on allowing fast experimentation and easy
 community contributions.
+
+#### Legal notice
+
+Package is under MIT license. 
+
+*Authored by Willian Roscoe and original sources located [here](https://github.com/autorope/donkeycar)*.
 
 #### Quick Links
 * [Donkeycar Updates & Examples](http://donkeycar.com)
