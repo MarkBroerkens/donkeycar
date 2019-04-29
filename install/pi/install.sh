@@ -39,3 +39,5 @@ source ~/env/bin/activate
 
 #make sure the virtual environment is active
 source ~/env/bin/activate
+
+pip install pandas #also installs numpy
