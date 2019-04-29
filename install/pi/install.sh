@@ -18,7 +18,7 @@ sudo apt install libzmq-dev -y
 sudo apt install xsel xclip -y
 sudo apt install python3-h5py -y
 
-#install numpy and pandas (3 min)
+#install xml and xsl (3 min)
 sudo apt install libxml2-dev python3-lxml -y
 sudo apt install libxslt-dev -y
 
@@ -36,8 +36,5 @@ echo '#start env' >> ~/.bashrc
 echo 'source ~/env/bin/activate' >> ~/.bashrc
 source ~/env/bin/activate
 
-
-#make sure the virtual environment is active
-source ~/env/bin/activate
-
-pip install pandas #also installs numpy
+pip install numpy==1.16.2
+pip install pandas 
