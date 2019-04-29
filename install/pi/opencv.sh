@@ -1,8 +1,8 @@
 #install opencv (1 hour)
 #instructions from:https://raspberrypi.stackexchange.com/questions/69169/how-to-install-opencv-on-raspberry-pi-3-in-raspbian-jessie
 
-git clone --tag 3.4.6 --depth 1  https://github.com/opencv/opencv.git
-git clone --tag 3.4.6 --depth 1 https://github.com/opencv/opencv_contrib.git
+git clone --branch 3.4.6 --depth 1  https://github.com/opencv/opencv.git
+git clone --branch 3.4.6 --depth 1 https://github.com/opencv/opencv_contrib.git
 
 cd ~/opencv
 mkdir build
