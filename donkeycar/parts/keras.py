@@ -94,7 +94,7 @@ def default_linear():
     x = Dropout(rate=.1)(x)
     x = Dense(units=50, activation='linear')(x)
     x = Dropout(rate=.1)(x)
-    # categorical output of the angle
+    # continuous output of the angle
     angle_out = Dense(units=1, activation='linear', name='angle_out')(x)
 
     # continous output of throttle
