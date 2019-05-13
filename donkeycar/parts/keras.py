@@ -14,7 +14,6 @@ models to help direct the vehicles motion.
 
 import os
 import numpy as np
-import keras
 
 import donkeycar as dk
 
@@ -25,12 +24,8 @@ class KerasPilot(object):
         self.optimizer = "adam"
  
     def load(self, model_path):
-        from keras.models import load_model
-        from keras.utils import CustomObjectScope
-        from keras.initializers import glorot_uniform
-
-        with CustomObjectScope({'GlorotUniform': glorot_uniform()}):
-            self.model = load_model(model_path)
+        from tensorflow.python.keras.models import load_model
+        self.model = load_model(model_path)
 
     def load_weights(self, model_path, by_name=True):
         self.model.load_weights(model_path, by_name=by_name)
@@ -43,11 +38,11 @@ class KerasPilot(object):
 
     def set_optimizer(self, optimizer_type, rate, decay):
         if optimizer_type == "adam":
-            self.model.optimizer = keras.optimizers.Adam(lr=rate, decay=decay)
+            self.model.optimizer =  tensorflow.python.keras.optimizers.Adam(lr=rate, decay=decay)
         elif optimizer_type == "sgd":
-            self.model.optimizer = keras.optimizers.SGD(lr=rate, decay=decay)
+            self.model.optimizer = tensorflow.python.keras.optimizers.SGD(lr=rate, decay=decay)
         elif optimizer_type == "rmsprop":
-            self.model.optimizer = keras.optimizers.RMSprop(lr=rate, decay=decay)
+            self.model.optimizer = tensorflow.python.keras.optimizers.RMSprop(lr=rate, decay=decay)
         else:
             raise Exception("unknown optimizer type: %s" % optimizer_type)
     
@@ -61,14 +56,14 @@ class KerasPilot(object):
         """
 
         #checkpoint to save model after each epoch
-        save_best = keras.callbacks.ModelCheckpoint(saved_model_path, 
+        save_best = tensorflow.python.keras.callbacks.ModelCheckpoint(saved_model_path,
                                                     monitor='val_loss', 
                                                     verbose=verbose, 
                                                     save_best_only=True, 
                                                     mode='min')
         
         #stop training if the validation error stops improving.
-        early_stop = keras.callbacks.EarlyStopping(monitor='val_loss', 
+        early_stop = tensorflow.python.keras.callbacks.EarlyStopping(monitor='val_loss',
                                                    min_delta=min_delta, 
                                                    patience=patience, 
                                                    verbose=verbose, 
@@ -253,13 +248,13 @@ class KerasLocalizer(KerasPilot):
         return angle_unbinned, throttle, loc
 
 def default_categorical(input_shape=(120, 160, 3), roi_crop=(0, 0)):
-    from keras.layers import Input, Dense
-    from keras.models import Model
-    from keras.layers import Convolution2D, MaxPooling2D, Reshape, BatchNormalization
-    from keras.layers import Activation, Dropout, Flatten, Dense, Cropping2D, Lambda
+    from tensorflow.python.keras.layers import Input, Dense
+    from tensorflow.python.keras.models import Model
+    from tensorflow.python.keras.layers import Convolution2D, MaxPooling2D, Reshape, BatchNormalization
+    from tensorflow.python.keras.layers import Activation, Dropout, Flatten, Dense, Cropping2D, Lambda
     
 
-    opt = keras.optimizers.Adam()
+    opt = tensorflow.python.keras.optimizers.Adam()
     drop = 0.4
 
     img_in = Input(shape=input_shape, name='img_in')                      # First layer, input layer, Shape comes from camera.py resolution, RGB
@@ -300,10 +295,10 @@ def default_categorical(input_shape=(120, 160, 3), roi_crop=(0, 0)):
 
 
 def default_n_linear(num_outputs, input_shape=(120, 160, 3), roi_crop=(0, 0)):
-    from keras.layers import Input, Dense
-    from keras.models import Model
-    from keras.layers import Convolution2D, MaxPooling2D, Reshape, BatchNormalization
-    from keras.layers import Activation, Dropout, Flatten, Cropping2D, Lambda
+    from tensorflow.python.keras.layers import Input, Dense
+    from tensorflow.python.keras.models import Model
+    from tensorflow.python.keras.layers import Convolution2D, MaxPooling2D, Reshape, BatchNormalization
+    from tensorflow.python.keras.layers import Activation, Dropout, Flatten, Cropping2D, Lambda
 
     drop = 0.1
     
@@ -345,11 +340,11 @@ def default_imu(num_outputs, num_imu_inputs, input_shape):
     Notes: this model depends on concatenate which failed on keras < 2.0.8
     '''
 
-    from keras.layers import Input, Dense
-    from keras.models import Model
-    from keras.layers import Convolution2D, MaxPooling2D, Reshape, BatchNormalization
-    from keras.layers import Activation, Dropout, Flatten, Cropping2D, Lambda
-    from keras.layers.merge import concatenate
+    from tensorflow.python.keras.layers import Input, Dense
+    from tensorflow.python.keras.models import Model
+    from tensorflow.python.keras.layers import Convolution2D, MaxPooling2D, Reshape, BatchNormalization
+    from tensorflow.python.keras.layers import Activation, Dropout, Flatten, Cropping2D, Lambda
+    from tensorflow.python.keras.layers.merge import concatenate
     
     img_in = Input(shape=input_shape, name='img_in')
     imu_in = Input(shape=(num_imu_inputs,), name="imu_in")
@@ -393,11 +388,11 @@ def default_bhv(num_outputs, num_bvh_inputs, input_shape):
     Notes: this model depends on concatenate which failed on keras < 2.0.8
     '''
 
-    from keras.layers import Input, Dense
-    from keras.models import Model
-    from keras.layers import Convolution2D, MaxPooling2D, Reshape, BatchNormalization
-    from keras.layers import Activation, Dropout, Flatten, Cropping2D, Lambda
-    from keras.layers.merge import concatenate
+    from tensorflow.python.keras.layers import Input, Dense
+    from tensorflow.python.keras.models import Model
+    from tensorflow.python.keras.layers import Convolution2D, MaxPooling2D, Reshape, BatchNormalization
+    from tensorflow.python.keras.layers import Activation, Dropout, Flatten, Cropping2D, Lambda
+    from tensorflow.python.keras.layers.merge import concatenate
     
     img_in = Input(shape=input_shape, name='img_in')
     bvh_in = Input(shape=(num_bvh_inputs,), name="behavior_in")
@@ -442,11 +437,11 @@ def default_loc(num_outputs, num_locations, input_shape):
     Notes: this model depends on concatenate which failed on keras < 2.0.8
     '''
 
-    from keras.layers import Input, Dense
-    from keras.models import Model
-    from keras.layers import Convolution2D, MaxPooling2D, Reshape, BatchNormalization
-    from keras.layers import Activation, Dropout, Flatten, Cropping2D, Lambda
-    from keras.layers.merge import concatenate
+    from tensorflow.python.keras.layers import Input, Dense
+    from tensorflow.python.keras.models import Model
+    from tensorflow.python.keras.layers import Convolution2D, MaxPooling2D, Reshape, BatchNormalization
+    from tensorflow.python.keras.layers import Activation, Dropout, Flatten, Cropping2D, Lambda
+    from tensorflow.python.keras.layers.merge import concatenate
     from donkeycar.contrib.coordconv.coord import CoordinateChannel2D
     
     drop = 0.5
@@ -532,13 +527,13 @@ class KerasRNN_LSTM(KerasPilot):
 
 def rnn_lstm(seq_length=3, num_outputs=2, image_shape=(120,160,3)):
 
-    from keras.layers import Input, Dense
-    from keras.models import Sequential
-    from keras.layers import Convolution2D, MaxPooling2D, Reshape, BatchNormalization
-    from keras.layers import Activation, Dropout, Flatten, Cropping2D, Lambda
-    from keras.layers.merge import concatenate
-    from keras.layers import LSTM
-    from keras.layers.wrappers import TimeDistributed as TD
+    from tensorflow.python.keras.layers import Input, Dense
+    from tensorflow.python.keras.models import Sequential
+    from tensorflow.python.keras.layers import Convolution2D, MaxPooling2D, Reshape, BatchNormalization
+    from tensorflow.python.keras.layers import Activation, Dropout, Flatten, Cropping2D, Lambda
+    from tensorflow.python.keras.layers.merge import concatenate
+    from tensorflow.python.keras.layers import LSTM
+    from tensorflow.python.keras.layers.wrappers import TimeDistributed as TD
 
     img_seq_shape = (seq_length,) + image_shape   
     img_in = Input(batch_shape = img_seq_shape, name='img_in')
@@ -606,10 +601,10 @@ class Keras3D_CNN(KerasPilot):
 
 
 def build_3d_cnn(w, h, d, s, num_outputs):
-    from keras.layers import Input, Dense
-    from keras.models import Sequential
-    from keras.layers import Conv3D, MaxPooling3D, Reshape, BatchNormalization
-    from keras.layers import Activation, Dropout, Flatten, Cropping3D
+    from tensorflow.python.keras.layers import Input, Dense
+    from tensorflow.python.keras.models import Sequential
+    from tensorflow.python.keras.layers import Conv3D, MaxPooling3D, Reshape, BatchNormalization
+    from tensorflow.python.keras.layers import Activation, Dropout, Flatten, Cropping3D
 
     #Credit: https://github.com/jessecha/DNRacing/blob/master/3D_CNN_Model/model.py
     '''
@@ -700,10 +695,10 @@ class KerasLatent(KerasPilot):
 
 
 def default_latent(num_outputs, input_shape):
-    from keras.layers import Input, Dense
-    from keras.models import Model
-    from keras.layers import Convolution2D, MaxPooling2D, Reshape, BatchNormalization
-    from keras.layers import Activation, Dropout, Flatten, Cropping2D, Lambda, Conv2DTranspose
+    from tensorflow.python.keras.layers import Input, Dense
+    from tensorflow.python.keras.models import Model
+    from tensorflow.python.keras.layers import Convolution2D, MaxPooling2D, Reshape, BatchNormalization
+    from tensorflow.python.keras.layers import Activation, Dropout, Flatten, Cropping2D, Lambda, Conv2DTranspose
 
     drop = 0.2
     
