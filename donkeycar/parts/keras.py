@@ -9,7 +9,7 @@ functions to run and train autopilots using keras
 from tensorflow.python.keras.layers import Input
 from tensorflow.python.keras.models import Model, load_model
 from tensorflow.python.keras.layers import Convolution2D
-from tensorflow.python.keras.layers import Dropout, Flatten, Dense
+from tensorflow.python.keras.layers import Dropout, Flatten, Dense, BatchNormalization
 from tensorflow.python.keras.callbacks import ModelCheckpoint, EarlyStopping
 
 
