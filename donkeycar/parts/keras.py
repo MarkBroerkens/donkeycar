@@ -119,10 +119,10 @@ class KerasCategorical(KerasPilot):
     
     
     
-class KerasLinear(KerasPilot):
-    def __init__(self, input_shape=(120, 160, 3), roi_crop=(0, 0), *args, **kwargs):
+class KerasLinear(KerasPilot):        
+    def __init__(self, num_outputs=2, input_shape=(120, 160, 3), roi_crop=(0, 0), *args, **kwargs):
         super(KerasLinear, self).__init__(*args, **kwargs)
-        self.model = default_linear()
+        self.model = default_n_linear(num_outputs, input_shape, roi_crop)
         self.compile()
 
     def compile(self):
@@ -293,41 +293,6 @@ def default_categorical(input_shape=(120, 160, 3), roi_crop=(0, 0)):
     model = Model(inputs=[img_in], outputs=[angle_out, throttle_out])
     return model
 
-def default_linear():
-    from keras.layers import Input, Dense
-    from keras.models import Model
-    from keras.layers import Convolution2D, MaxPooling2D, Reshape, BatchNormalization
-    from keras.layers import Activation, Dropout, Flatten, Cropping2D, Lambda
-    
-    img_in = Input(shape=(120, 160, 3), name='img_in')
-    x = img_in
-
-    # Convolution2D class name is an alias for Conv2D
-    x = Convolution2D(filters=24, kernel_size=(5, 5), strides=(2, 2), activation='relu')(x)
-    x = Convolution2D(filters=32, kernel_size=(5, 5), strides=(2, 2), activation='relu')(x)
-    x = Convolution2D(filters=64, kernel_size=(5, 5), strides=(2, 2), activation='relu')(x)
-    x = Convolution2D(filters=64, kernel_size=(3, 3), strides=(2, 2), activation='relu')(x)
-    x = Convolution2D(filters=64, kernel_size=(3, 3), strides=(1, 1), activation='relu')(x)
-
-    x = Flatten(name='flattened')(x)
-    x = Dense(units=100, activation='linear')(x)
-    x = Dropout(rate=.1)(x)
-    x = Dense(units=50, activation='linear')(x)
-    x = Dropout(rate=.1)(x)
-    # categorical output of the angle
-    angle_out = Dense(units=1, activation='linear', name='angle_out')(x)
-
-    # continous output of throttle
-    throttle_out = Dense(units=1, activation='linear', name='throttle_out')(x)
-
-    model = Model(inputs=[img_in], outputs=[angle_out, throttle_out])
-
-    model.compile(optimizer='adam',
-                  loss={'angle_out': 'mean_squared_error',
-                        'throttle_out': 'mean_squared_error'},
-                  loss_weights={'angle_out': 0.5, 'throttle_out': .5})
-
-    return model
 
 def default_n_linear(num_outputs, input_shape=(120, 160, 3), roi_crop=(0, 0)):
     from keras.layers import Input, Dense
@@ -339,7 +304,7 @@ def default_n_linear(num_outputs, input_shape=(120, 160, 3), roi_crop=(0, 0)):
     
     img_in = Input(shape=input_shape, name='img_in')
     x = img_in
-    x = Cropping2D(cropping=(roi_crop, (0,0)))(x) #trim pixels off top and bottom
+    #x = Cropping2D(cropping=(roi_crop, (0,0)))(x) #trim pixels off top and bottom
     #x = Lambda(lambda x: x/127.5 - 1.)(x) # normalize and re-center
     x = BatchNormalization()(x)
     x = Convolution2D(24, (5,5), strides=(2,2), activation='relu', name="conv2d_1")(x)
@@ -348,7 +313,7 @@ def default_n_linear(num_outputs, input_shape=(120, 160, 3), roi_crop=(0, 0)):
     x = Dropout(drop)(x)
     x = Convolution2D(64, (5,5), strides=(2,2), activation='relu', name="conv2d_3")(x)
     x = Dropout(drop)(x)
-    x = Convolution2D(64, (3,3), strides=(1,1), activation='relu', name="conv2d_4")(x)
+    x = Convolution2D(64, (3,3), strides=(2,2), activation='relu', name="conv2d_4")(x)
     x = Dropout(drop)(x)
     x = Convolution2D(64, (3,3), strides=(1,1), activation='relu', name="conv2d_5")(x)
     x = Dropout(drop)(x)
