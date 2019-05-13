@@ -120,9 +120,9 @@ class KerasCategorical(KerasPilot):
     
     
 class KerasLinear(KerasPilot):
-    def __init__(self, num_outputs=2, input_shape=(120, 160, 3), roi_crop=(0, 0), *args, **kwargs):
+    def __init__(self, input_shape=(120, 160, 3), roi_crop=(0, 0), *args, **kwargs):
         super(KerasLinear, self).__init__(*args, **kwargs)
-        self.model = default_n_linear(num_outputs, input_shape, roi_crop)
+        self.model = default_linear(input_shape)
         self.compile()
 
     def compile(self):
@@ -293,6 +293,36 @@ def default_categorical(input_shape=(120, 160, 3), roi_crop=(0, 0)):
     model = Model(inputs=[img_in], outputs=[angle_out, throttle_out])
     return model
 
+def default_linear():
+    img_in = Input(shape=(120, 160, 3), name='img_in')
+    x = img_in
+
+    # Convolution2D class name is an alias for Conv2D
+    x = Convolution2D(filters=24, kernel_size=(5, 5), strides=(2, 2), activation='relu')(x)
+    x = Convolution2D(filters=32, kernel_size=(5, 5), strides=(2, 2), activation='relu')(x)
+    x = Convolution2D(filters=64, kernel_size=(5, 5), strides=(2, 2), activation='relu')(x)
+    x = Convolution2D(filters=64, kernel_size=(3, 3), strides=(2, 2), activation='relu')(x)
+    x = Convolution2D(filters=64, kernel_size=(3, 3), strides=(1, 1), activation='relu')(x)
+
+    x = Flatten(name='flattened')(x)
+    x = Dense(units=100, activation='linear')(x)
+    x = Dropout(rate=.1)(x)
+    x = Dense(units=50, activation='linear')(x)
+    x = Dropout(rate=.1)(x)
+    # categorical output of the angle
+    angle_out = Dense(units=1, activation='linear', name='angle_out')(x)
+
+    # continous output of throttle
+    throttle_out = Dense(units=1, activation='linear', name='throttle_out')(x)
+
+    model = Model(inputs=[img_in], outputs=[angle_out, throttle_out])
+
+    model.compile(optimizer='adam',
+                  loss={'angle_out': 'mean_squared_error',
+                        'throttle_out': 'mean_squared_error'},
+                  loss_weights={'angle_out': 0.5, 'throttle_out': .5})
+
+    return model
 
 def default_n_linear(num_outputs, input_shape=(120, 160, 3), roi_crop=(0, 0)):
     from keras.layers import Input, Dense
