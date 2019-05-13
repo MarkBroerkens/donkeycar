@@ -294,6 +294,11 @@ def default_categorical(input_shape=(120, 160, 3), roi_crop=(0, 0)):
     return model
 
 def default_linear():
+    from keras.layers import Input, Dense
+    from keras.models import Model
+    from keras.layers import Convolution2D, MaxPooling2D, Reshape, BatchNormalization
+    from keras.layers import Activation, Dropout, Flatten, Cropping2D, Lambda
+    
     img_in = Input(shape=(120, 160, 3), name='img_in')
     x = img_in
 
