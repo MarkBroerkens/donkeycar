@@ -83,11 +83,12 @@ def default_linear():
     x = img_in
 
     # Convolution2D class name is an alias for Conv2D
-    x = Convolution2D(filters=24, kernel_size=(5, 5), strides=(2, 2), activation='relu')(x)
-    x = Convolution2D(filters=32, kernel_size=(5, 5), strides=(2, 2), activation='relu')(x)
-    x = Convolution2D(filters=64, kernel_size=(5, 5), strides=(2, 2), activation='relu')(x)
-    x = Convolution2D(filters=64, kernel_size=(3, 3), strides=(2, 2), activation='relu')(x)
-    x = Convolution2D(filters=64, kernel_size=(3, 3), strides=(1, 1), activation='relu')(x)
+    x = BatchNormalization()(x)
+    x = Convolution2D(filters=24, kernel_size=(5, 5), strides=(2, 2), activation='relu', name="conv2d_1")(x)
+    x = Convolution2D(filters=32, kernel_size=(5, 5), strides=(2, 2), activation='relu', name="conv2d_2")(x)
+    x = Convolution2D(filters=64, kernel_size=(5, 5), strides=(2, 2), activation='relu', name="conv2d_3")(x)
+    x = Convolution2D(filters=64, kernel_size=(3, 3), strides=(2, 2), activation='relu', name="conv2d_4")(x)
+    x = Convolution2D(filters=64, kernel_size=(3, 3), strides=(1, 1), activation='relu', name="conv2d_5")(x)
 
     x = Flatten(name='flattened')(x)
     x = Dense(units=100, activation='linear')(x)
