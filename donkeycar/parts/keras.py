@@ -122,7 +122,7 @@ class KerasCategorical(KerasPilot):
 class KerasLinear(KerasPilot):
     def __init__(self, input_shape=(120, 160, 3), roi_crop=(0, 0), *args, **kwargs):
         super(KerasLinear, self).__init__(*args, **kwargs)
-        self.model = default_linear(input_shape)
+        self.model = default_linear()
         self.compile()
 
     def compile(self):
