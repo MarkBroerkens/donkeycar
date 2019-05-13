@@ -25,7 +25,12 @@ class KerasPilot(object):
         self.optimizer = "adam"
  
     def load(self, model_path):
-        self.model = keras.models.load_model(model_path)
+        from keras.models import load_model
+        from keras.utils import CustomObjectScope
+        from keras.initializers import glorot_uniform
+
+        with CustomObjectScope({'GlorotUniform': glorot_uniform()}):
+            self.model = load_model(model_path)
 
     def load_weights(self, model_path, by_name=True):
         self.model.load_weights(model_path, by_name=by_name)
