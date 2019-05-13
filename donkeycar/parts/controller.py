@@ -292,40 +292,6 @@ class GasiaGamepad(Joystick):
 
 
 
-class GasiaGamepadController(JoystickController):
-    #A Controller object that maps inputs to actions
-    def __init__(self, *args, **kwargs):
-        super(GasiaGamepadController, self).__init__(*args, **kwargs)
-
-
-    def init_js(self):
-        #attempt to init joystick
-        try:
-            self.js = GasiaGamepad(self.dev_fn)
-            self.js.init()
-        except FileNotFoundError:
-            print(self.dev_fn, "not found.")
-            self.js = None
-        return self.js is not None
-
-
-    def init_trigger_maps(self):
-        #init set of mapping from buttons to function calls
-            
-        self.button_down_trigger_map = {
-            '1' : self.increase_max_throttle,
-            '3' : self.decrease_max_throttle,
-            'Start' : self.toggle_manual_recording,
-        }
-
-
-        self.axis_trigger_map = {
-            'Right' : self.set_steering,
-            'Left' : self.set_throttle,
-        }
-
-
-
 
 
 
@@ -989,6 +955,37 @@ class PS3JoystickController(JoystickController):
             'right_stick_vert' : self.set_throttle,
         }
 
+class GasiaGamepadController(JoystickController):
+    #A Controller object that maps inputs to actions
+    def __init__(self, *args, **kwargs):
+        super(GasiaGamepadController, self).__init__(*args, **kwargs)
+
+
+    def init_js(self):
+        #attempt to init joystick
+        try:
+            self.js = GasiaGamepad(self.dev_fn)
+            self.js.init()
+        except FileNotFoundError:
+            print(self.dev_fn, "not found.")
+            self.js = None
+        return self.js is not None
+
+
+    def init_trigger_maps(self):
+        #init set of mapping from buttons to function calls
+            
+        self.button_down_trigger_map = {
+            '1' : self.increase_max_throttle,
+            '3' : self.decrease_max_throttle,
+            'Start' : self.toggle_manual_recording,
+        }
+
+
+        self.axis_trigger_map = {
+            'Right' : self.set_steering,
+            'Left' : self.set_throttle,
+        }
 
 
 class PS4JoystickController(JoystickController):
