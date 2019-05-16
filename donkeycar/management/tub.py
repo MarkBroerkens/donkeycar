@@ -40,7 +40,7 @@ class WebServer(tornado.web.Application):
 
         super().__init__(handlers, **settings)
 
-    def start(self, port=8886):
+    def start(self, port=9999):
         self.port = int(port)
         self.listen(self.port)
         print('Listening on {}...'.format(port))
