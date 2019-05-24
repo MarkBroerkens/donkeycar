@@ -120,9 +120,9 @@ or via Putty:
 * Hostname:`<your pi IP address>`
 
 
-If you are using the prebuilt image specified above, then your Pi is ready to go. You should see a mycar and donkey directory.
+If you are using the prebuilt image specified above, then your Pi is ready to go. You should see a d2 and donkey directory.
 
-> Note: Check config.py to make sure it uses the correct settings for the PWM channel for steering and throttle. Open config.py ```nano ~/mycar/config.py``` and make sure that you see the lines:
+> Note: Check config.py to make sure it uses the correct settings for the PWM channel for steering and throttle. Open config.py ```nano ~/d2/config.py``` and make sure that you see the lines:
 >
 > * STEERING_CHANNEL = 1
 > * THROTTLE_CHANNEL = 0
@@ -147,7 +147,7 @@ python -c "import donkeycar as dk; print(dk.__version__)"
 Now generate the drive script, config and folder structure for your car.
 
 ```bash
-donkey createcar ~/mycar
+donkey createcar ~/d2
 ```
 
 ----
@@ -164,7 +164,7 @@ source env/bin/activate
 
 * Install donkey source and create your local working dir:
 ```bash
-git clone https://github.com/autorope/donkeycar
+git clone https://github.com/MarkBroerkens/donkeycar
 ```
 * Install the donkeycar package in pip
 
@@ -204,7 +204,7 @@ cd projects
 * Get the latest donkey from Github.
 
 ```
-git clone https://github.com/autorope/donkeycar
+git clone https://github.com/MarkBroerkens/donkeycar
 cd donkeycar
 ```
 
@@ -225,7 +225,7 @@ activate donkey
 
 ```
 pip install -e .
-donkey createcar ~/mycar
+donkey createcar ~/d2
 ```
 
 
@@ -262,7 +262,7 @@ cd projects
 * Get the latest donkey from Github.
 
 ```
-git clone https://github.com/autorope/donkeycar
+git clone https://github.com/MarkBroerkens/donkeycar.git
 cd donkeycar
 ```
 
@@ -284,7 +284,7 @@ pip install https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.10.1-
 
 ```
 pip install -e .
-donkey createcar ~/mycar
+donkey createcar ~/d2
 ```
 
 [Next: Calibrate your car.](./calibrate.md)
@@ -321,7 +321,7 @@ When you've created your new instance, open it up and create a new [Jupyter Note
 
 * In the first cell, type:
 ```python
-!git clone https://github.com/autorope/donkeycar ~/SageMaker/donkey
+!git clone https://github.com/MarkBroerkens/donkeycar ~/SageMaker/donkey
 ```
 
 * Close the Jupyter Notebook (not the instance!). You can delete it if you want.
@@ -342,7 +342,7 @@ Occasionally you may want to run with changes from a separate fork of donkey. Yo
 
 ```
 pip uninstall donkeycar
-git clone --depth=1 https://github.com/<username>/donkey donkey_<username>
+git clone --depth=1 https://github.com/<username>/donkeycar donkey_<username>
 cd donkey_<username>
 pip install -e .
 ```
