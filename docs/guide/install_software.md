@@ -183,6 +183,7 @@ pip install -e .[tf]
 Install matplotlib
 ```bash
 pip install matplotlib
+pip install opencv-python
 ```
 
 See [https://github.com/tensorflow/tensorflow/issues/7166](https://github.com/tensorflow/tensorflow/issues/7166) for more information.
