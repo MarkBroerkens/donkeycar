@@ -208,12 +208,6 @@ git clone https://github.com/MarkBroerkens/donkeycar
 cd donkeycar
 ```
 
-* Navigate to git master branch
-
-```
-git checkout master
-```
-
 * Create the Python Anaconda environment
 
 ```
@@ -271,12 +265,6 @@ cd donkeycar
 ```
 conda env create -f install/envs/mac.yml
 source activate donkey
-```
-
-* Install Tensorflow
-
-```
-pip install tensorflow==1.13.1
 ```
 
 
