@@ -158,6 +158,7 @@ Now let's setup the same donkey library on your laptop or server so you can test
 Install dependencies, setup virtualenv
 ```bash
 sudo apt-get install virtualenv build-essential python3-dev gfortran libhdf5-dev
+sudo apt-get install tcl-dev tk-dev python-tk python3-tk
 virtualenv env -p python3
 source env/bin/activate
 ```
@@ -177,6 +178,11 @@ pip install -e .[tf_gpu]
 Otherwise, install donkeycar and use *tensorflow* dependency:
 ```bash
 pip install -e .[tf]
+```
+
+Install matplotlib
+```bash
+pip install matplotlib
 ```
 
 See [https://github.com/tensorflow/tensorflow/issues/7166](https://github.com/tensorflow/tensorflow/issues/7166) for more information.
