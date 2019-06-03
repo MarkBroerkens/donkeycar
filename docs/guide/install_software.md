@@ -186,7 +186,7 @@ See [https://github.com/tensorflow/tensorflow/issues/7166](https://github.com/te
 
 ## Install donkeycar on Windows
 
-* Install [miniconda Python 3.6 64 bit](https://conda.io/miniconda.html). Be sure to check the box to allow it to modify your system path variable to add conda.
+* Install [miniconda Python 3.7 64 bit](https://conda.io/miniconda.html). Be sure to check the box to allow it to modify your system path variable to add conda.
 
 * Install [git 64 bit](https://git-scm.com/download/win)
 
@@ -240,7 +240,7 @@ donkey createcar ~/d2
 
 ## Install donkeycar on Mac
 
-* Install [miniconda Python 3.6 64 bit](https://conda.io/miniconda.html)
+* Install [miniconda Python 3.7 64 bit](https://conda.io/miniconda.html)
 
 * Install [git 64 bit](https://www.atlassian.com/git/tutorials/install-git)
 
