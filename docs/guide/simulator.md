@@ -18,6 +18,10 @@ Extract this compressed file. It will create a folder containing an executable. 
 
 If logs are not being generated you are probably running a version of OS X that sandboxes untrusted applications. This prevents the simulator writing to disk. To resolve this, move the executable within the Applications folder.
 
+When running the simulator the first time on Mac, you can select the screen resolution, etc. This menue only shows up again if you start the simulator with the "option" key pressed.
+
+You will find the log files in the package of the application.
+
 ### Recorded Data
 
 This simulator can create log data in the donkey tub format. This is stored in the `log` dir at the root of the folder next to the executable. On the mac you will need to browse the package contents to see this folder. If this folder is missing, no data will be recorded.
