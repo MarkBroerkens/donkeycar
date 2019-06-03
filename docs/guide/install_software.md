@@ -165,17 +165,18 @@ source env/bin/activate
 * Install donkey source and create your local working dir:
 ```bash
 git clone https://github.com/MarkBroerkens/donkeycar
+cd donkeycar
 ```
 * Install the donkeycar package in pip
 
 If you have an NVIDIA GPU - Install donkeycar and use *tensorflow-gpu* dependency:
 ```bash
-pip install donkeycar[tf_gpu]
+pip install -e .[tf_gpu]
 ```
 
 Otherwise, install donkeycar and use *tensorflow* dependency:
 ```bash
-pip install donkeycar[tf]
+pip install -e .[tf]
 ```
 
 See [https://github.com/tensorflow/tensorflow/issues/7166](https://github.com/tensorflow/tensorflow/issues/7166) for more information.
