@@ -1,3 +1,7 @@
+**This repository is archived. Please see https://github.com/autorope/donkeycar for the latest donkeycar software.**
+
+* * *
+
 # donkeycar: a python self driving library
 
 [![Build Status](https://travis-ci.com/MarkBroerkens/donkeycar.svg?branch=dev)](https://travis-ci.com/MarkBroerkens/donkeycar)
